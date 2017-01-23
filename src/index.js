@@ -1,8 +1,13 @@
 const express = require('express');
-const app = express();
+const rp = require('request-promise');
+const Promise = require('bluebird');
+const bodyParser = require('body-parser');
 
-app.get('/', (req, res, next) => {
-  res.send('Hello World');
-});
+const postsRouter = require('./api/posts');
+
+const app = express();
+app.use(bodyParser.json());
+
+app.use('/posts', postsRouter);
 
 app.listen(3000);
