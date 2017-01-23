@@ -19,8 +19,8 @@ router
 module.exports = router;
 
 function postsGetController(req, res, next) {
-  rp(apiUrl)
-      .then(rpResponse => res.json(JSON.parse(rpResponse)))
+  rp({ url: apiUrl, json: true})
+      .then(rpResponse => res.json(rpResponse))
       .catch(err => next(err));
 }
 
@@ -31,13 +31,13 @@ function postsPostController(req, res, next) {
     body: req.body,
     json: true
   })
-      .then(rpResponse => res.json(JSON.parse(rpResponse)))
+      .then(rpResponse => res.json(rpResponse))
       .catch(err => next(err));
 }
 
 function postsIdGetController(req, res, next) {
-  rp(`${apiUrl}/${req.params.id}`)
-      .then(rpResponse => res.json(JSON.parse(rpResponse)))
+  rp({ url: `${apiUrl}/${req.params.id}`, json: true})
+      .then(rpResponse => res.json(rpResponse))
       .catch(err => next(err));
 }
 
@@ -48,7 +48,7 @@ function postsIdPutController(req, res, next) {
     body: req.body,
     json: true
   })
-      .then(rpResponse => res.json(JSON.parse(rpResponse)))
+      .then(rpResponse => res.json(rpResponse))
       .catch(err => next(err));
 }
 
@@ -59,6 +59,6 @@ function postsIdDeleteController(req, res, next) {
     body: req.body,
     json: true
   })
-      .then(rpResponse => res.json(JSON.parse(rpResponse)))
+      .then(rpResponse => res.json(rpResponse))
       .catch(err => next(err));
 }

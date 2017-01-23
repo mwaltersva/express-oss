@@ -10,4 +10,11 @@ app.use(bodyParser.json());
 
 app.use('/posts', postsRouter);
 
+app.use((err, req, res) => {
+  console.error(err);
+  res.json({
+    error: err
+  });
+});
+
 app.listen(3000);
