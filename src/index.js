@@ -13,10 +13,10 @@ app.use(bodyParser.urlencoded({extended: true})); // Register the form-urlencode
 app.set('view engine', 'pug'); // Register the pug template library
 app.set('views', path.join(__dirname, 'views')); // Register the views directory
 
-
 /**
  * Register our middleware. Requests sent to localhost:3000/hello will first call the above
- * middleware and then call the helloRouter middleware.
+ * middleware and then call the helloRouter middleware. Middleware is called in the order in which
+ * it was registered.
  */
 app.use('/hello', helloRouter);
 app.use('/adder', adderRouter);
@@ -39,7 +39,8 @@ app.use('*', (req, res) => {
 });
 
 /**
- * Error handling middleware comes last, and accepts an Error as the first argument
+ * Error handling middleware comes last, and accepts an Error as the first argument.
+ * Gets called if next() is called with an error as the argument
  */
 app.use((err, req, res, next) => {
   res.status(500);
